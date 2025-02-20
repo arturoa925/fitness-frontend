@@ -1,8 +1,32 @@
-# React + Vite
+# FITNESS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Screenshot 2025-02-19 at 10 05 43 PM](https://github.com/user-attachments/assets/5d366981-7ab6-4cb3-9fd2-331fe4cfb52b)
 
-Currently, two official plugins are available:
+### A mobile personal trainer app. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
+
+I have always dreamt of being a personal trainer. Therefore, I made an app to create workouts. Everyday, a unique workout is curated. Users are given exercises along with descriptions and video demonstrations. Feeling lost at the gym or starting at home, this app will gurantee you a good sweat.
+
+## Getting Started 
+
+The only requirement here is Visual Studio Code ~ VS Code
+
+## Installation 
+
+1. ``npm i``
+
+All dependencies are present in the package.json
+
+## ***To Note*** 
+
+### This needs to be ran and paired with its back-end counterpart 
+
+## How to Run
+
+1. ``npm run dev``
+
+## Help
+
+Reach out to my email, posted on my Github profile page. 
+
