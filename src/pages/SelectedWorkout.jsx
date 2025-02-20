@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
+import BASE_URL from "../components/Config";
 
 const SelectedWorkout = () => {
-// * Render URL
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// // * Render URL
+//   const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -55,7 +56,7 @@ const SelectedWorkout = () => {
 
       try {
         const response = await fetch(
-          `${API_BASE_URL}/exercise/workoutdate`,
+          `${BASE_URL}/exercise/workoutdate`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

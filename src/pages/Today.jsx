@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 import { se } from "date-fns/locale";
 import { set } from "date-fns";
+import BASE_URL from "../components/Config";
 
 function Today() {
   const [workout, setWorkout] = useState([]);
@@ -20,7 +21,7 @@ function Today() {
     navigate("/");
   };
 
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  // const API_BASE_URL =  import.meta.env.VITE_API_URL;
 
   // * generate workout for today on page load
   const todaysWorkout = async (e) => {
@@ -31,7 +32,7 @@ function Today() {
       const id = JSON.parse(user).user.id;
 
       const response = await fetch(
-        `${API_BASE_URL}/exercise/dailyworkout`,
+        `${BASE_URL}/exercise/dailyworkout`,
         {
           method: "POST",
           headers: {

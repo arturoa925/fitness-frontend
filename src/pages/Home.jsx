@@ -7,10 +7,11 @@ import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import YearlyCalendar from "../components/YearCalendar";
 import YearOverview from "./YearOverview";
+import BASE_URL from "../components/Config";
 
 function Home() {
-// * Render URL
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// // * Render URL
+//   const API_BASE_URL =  import.meta.env.VITE_API_URL;
 
   // * home navigation
   const navigate = useNavigate();
@@ -79,15 +80,16 @@ function Home() {
       return;
     }
 
+
     try {
-      const response = await fetch(`${API_BASE_URL}/users/login`, {
+      const response = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: email, password: password }),
       });
-
+console.log("Sending login request with:", { email: email, password: password });
       const data = await response.json();
       console.log(data);
       const token = data.token;
@@ -124,7 +126,7 @@ function Home() {
     const sanitizedName = DOMPurify.sanitize(newName);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/users/signup`, {
+      const response = await fetch(`${BASE_URL}/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

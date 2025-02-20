@@ -1,9 +1,10 @@
 import { format, subDays, isToday } from "date-fns";
 import { useEffect, useState } from "react";
+import BASE_URL from "./Config";
 
 function LastTwoWeeksCalendar({ onDateClick }) {
-  // * Render URL
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  // // * Render URL
+  // const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   // * Get the last 12 days including today
   const today = new Date();
@@ -21,7 +22,7 @@ function LastTwoWeeksCalendar({ onDateClick }) {
       const user = localStorage.getItem("user");
       const id = JSON.parse(user).user.id;
 
-      const response = await fetch(`${API_BASE_URL}/exercise/exercises`, {
+      const response = await fetch(`${BASE_URL}/exercise/exercises`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

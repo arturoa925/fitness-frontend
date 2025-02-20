@@ -1,9 +1,10 @@
 import { format, startOfYear, addDays, eachMonthOfInterval, startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
 import { useEffect, useState } from "react";
+import BASE_URL from "./Config";
 
 function YearlyCalendar({ onDateClick }) {
-// * Render URL
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// // * Render URL
+//   const API_BASE_URL =  import.meta.env.VITE_API_URL;
 
   const today = new Date();
   const startOfCurrentYear = startOfYear(today);
@@ -22,7 +23,7 @@ function YearlyCalendar({ onDateClick }) {
       const user = localStorage.getItem("user");
       const id = JSON.parse(user).user.id;
 
-      const response = await fetch(`${API_BASE_URL}/exercise/exercises`, {
+      const response = await fetch(`${BASE_URL}/exercise/exercises`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
