@@ -9,6 +9,9 @@ import YearlyCalendar from "../components/YearCalendar";
 import YearOverview from "./YearOverview";
 
 function Home() {
+// * Render URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   // * home navigation
   const navigate = useNavigate();
   const handleToday = () => {
@@ -77,7 +80,7 @@ function Home() {
     }
 
     try {
-      const response = await fetch("http://localhost:3004/users/login", {
+      const response = await fetch(`${API_BASE_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -121,7 +124,7 @@ function Home() {
     const sanitizedName = DOMPurify.sanitize(newName);
 
     try {
-      const response = await fetch("http://localhost:3004/users/signup", {
+      const response = await fetch(`${API_BASE_URL}/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

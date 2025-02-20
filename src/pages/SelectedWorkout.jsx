@@ -3,6 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 
 const SelectedWorkout = () => {
+// * Render URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const date = queryParams.get("date");
@@ -52,7 +55,7 @@ const SelectedWorkout = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:3004/exercise/workoutdate",
+          `${API_BASE_URL}/exercise/workoutdate`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -97,127 +100,127 @@ const SelectedWorkout = () => {
 
   // * fetch exercise photos from Pexels api
 
-  const fetchExercisePhotos = async (exerciseName) => {
-    try {
-      const searchQueries = [
-        `${exerciseName} workout`,
-        `${exerciseName} exercise`,
-        `fitness training`,
-        `general workout`,
-      ];
+  // const fetchExercisePhotos = async (exerciseName) => {
+  //   try {
+  //     const searchQueries = [
+  //       `${exerciseName} workout`,
+  //       `${exerciseName} exercise`,
+  //       `fitness training`,
+  //       `general workout`,
+  //     ];
 
-      for (const query of searchQueries) {
-        const response = await fetch(
-          `http://localhost:3004/exercise/pexels?q=${encodeURIComponent(query)}`
-        );
+  //     for (const query of searchQueries) {
+  //       const response = await fetch(
+  //         `http://localhost:3004/exercise/pexels?q=${encodeURIComponent(query)}`
+  //       );
 
-        const data = await response.json();
-        if (data.photos && data.photos.length > 0) {
-          return data.photos[0].src.medium; // * Return the first found image
-        }
-      }
+  //       const data = await response.json();
+  //       if (data.photos && data.photos.length > 0) {
+  //         return data.photos[0].src.medium; // * Return the first found image
+  //       }
+  //     }
 
-      console.warn(
-        `No images found for "${exerciseName}". Returning placeholder.`
-      );
-      return "";
-    } catch (error) {
-      console.error("Error fetching images:", error);
-      return "";
-    }
-  };
+  //     console.warn(
+  //       `No images found for "${exerciseName}". Returning placeholder.`
+  //     );
+  //     return "";
+  //   } catch (error) {
+  //     console.error("Error fetching images:", error);
+  //     return "";
+  //   }
+  // };
 
-  const [exerciseImages, setExerciseImages] = useState({});
+  // const [exerciseImages, setExerciseImages] = useState({});
 
-  useEffect(() => {
-    const loadImages = async () => {
-      if (!workout || !workout.Exercises || workout.Exercises.length === 0) {
-        console.warn("No exercises available, skipping image fetch.");
-        return;
-      }
+  // useEffect(() => {
+  //   const loadImages = async () => {
+  //     if (!workout || !workout.Exercises || workout.Exercises.length === 0) {
+  //       console.warn("No exercises available, skipping image fetch.");
+  //       return;
+  //     }
 
-      const imagePromises = workout.Exercises.map(async (exercise) => {
-        const imageUrl = await fetchExercisePhotos(exercise.name);
-        return { id: exercise.id, imageUrl };
-      });
+  //     const imagePromises = workout.Exercises.map(async (exercise) => {
+  //       const imageUrl = await fetchExercisePhotos(exercise.name);
+  //       return { id: exercise.id, imageUrl };
+  //     });
 
-      try {
-        const imageResults = await Promise.all(imagePromises);
-        const imagesMap = imageResults.reduce((acc, { id, imageUrl }) => {
-          acc[id] = imageUrl;
-          return acc;
-        }, {});
+  //     try {
+  //       const imageResults = await Promise.all(imagePromises);
+  //       const imagesMap = imageResults.reduce((acc, { id, imageUrl }) => {
+  //         acc[id] = imageUrl;
+  //         return acc;
+  //       }, {});
 
-        setExerciseImages(imagesMap);
-      } catch (error) {
-        console.error("Error loading images:", error);
-      }
-    };
+  //       setExerciseImages(imagesMap);
+  //     } catch (error) {
+  //       console.error("Error loading images:", error);
+  //     }
+  //   };
 
-    loadImages();
-  }, [workout]);
+  //   loadImages();
+  // }, [workout]);
 
-  // * fetch exercise videos from Pexels api
+  // // * fetch exercise videos from Pexels api
 
-  const fetchExerciseVideos = async (exerciseName) => {
-    try {
-      const searchQueries = [
-        `${exerciseName} workout`,
-        `${exerciseName} exercise`,
-        `fitness training`,
-        `general workout`,
-      ];
+  // const fetchExerciseVideos = async (exerciseName) => {
+  //   try {
+  //     const searchQueries = [
+  //       `${exerciseName} workout`,
+  //       `${exerciseName} exercise`,
+  //       `fitness training`,
+  //       `general workout`,
+  //     ];
 
-      for (const query of searchQueries) {
-        const response = await fetch(
-          `http://localhost:3004/exercise/pexels?q=${encodeURIComponent(query)}`
-        );
+  //     for (const query of searchQueries) {
+  //       const response = await fetch(
+  //         `http://localhost:3004/exercise/pexels?q=${encodeURIComponent(query)}`
+  //       );
 
-        const data = await response.json();
-        if (data.videos && data.videos.length > 0) {
-          return data.videos[0].video_files[0].link;
-        }
-      }
+  //       const data = await response.json();
+  //       if (data.videos && data.videos.length > 0) {
+  //         return data.videos[0].video_files[0].link;
+  //       }
+  //     }
 
-      console.warn(
-        `No videos found for "${exerciseName}". Returning placeholder.`
-      );
-      return "";
-    } catch (error) {
-      console.error("Error fetching videos:", error);
-      return "";
-    }
-  };
+  //     console.warn(
+  //       `No videos found for "${exerciseName}". Returning placeholder.`
+  //     );
+  //     return "";
+  //   } catch (error) {
+  //     console.error("Error fetching videos:", error);
+  //     return "";
+  //   }
+  // };
 
-  const [exerciseVideos, setExerciseVideos] = useState({});
+  // const [exerciseVideos, setExerciseVideos] = useState({});
 
-  useEffect(() => {
-    const loadVideos = async () => {
-      if (!workout || !workout.Exercises || workout.Exercises.length === 0) {
-        console.warn("No exercises available, skipping video fetch.");
-        return;
-      }
+  // useEffect(() => {
+  //   const loadVideos = async () => {
+  //     if (!workout || !workout.Exercises || workout.Exercises.length === 0) {
+  //       console.warn("No exercises available, skipping video fetch.");
+  //       return;
+  //     }
 
-      const videoPromises = workout.Exercises.map(async (exercise) => {
-        const videoUrl = await fetchExerciseVideos(exercise.name);
-        return { id: exercise.id, videoUrl };
-      });
+  //     const videoPromises = workout.Exercises.map(async (exercise) => {
+  //       const videoUrl = await fetchExerciseVideos(exercise.name);
+  //       return { id: exercise.id, videoUrl };
+  //     });
 
-      try {
-        const videoResults = await Promise.all(videoPromises);
-        const videosMap = videoResults.reduce((acc, { id, videoUrl }) => {
-          acc[id] = videoUrl;
-          return acc;
-        }, {});
+  //     try {
+  //       const videoResults = await Promise.all(videoPromises);
+  //       const videosMap = videoResults.reduce((acc, { id, videoUrl }) => {
+  //         acc[id] = videoUrl;
+  //         return acc;
+  //       }, {});
 
-        setExerciseVideos(videosMap);
-      } catch (error) {
-        console.error("Error loading videos:", error);
-      }
-    };
+  //       setExerciseVideos(videosMap);
+  //     } catch (error) {
+  //       console.error("Error loading videos:", error);
+  //     }
+  //   };
 
-    loadVideos();
-  }, [workout]);
+  //   loadVideos();
+  // }, [workout]);
 
   if (loading) {
     return (
