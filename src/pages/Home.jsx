@@ -10,9 +10,6 @@ import YearOverview from "./YearOverview";
 import BASE_URL from "../components/Config";
 
 function Home() {
-// // * Render URL
-//   const API_BASE_URL =  import.meta.env.VITE_API_URL;
-
   // * home navigation
   const navigate = useNavigate();
   const handleToday = () => {
@@ -20,7 +17,7 @@ function Home() {
   };
   const YearCalendar = () => {
     navigate("/yearoverview");
-  }
+  };
   const selectedDateWorkout = (date) => {
     // * Convert date string into parts
     const [year, month, day] = date.split("-").map(Number);
@@ -80,7 +77,6 @@ function Home() {
       return;
     }
 
-
     try {
       const response = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
@@ -89,7 +85,10 @@ function Home() {
         },
         body: JSON.stringify({ email: email, password: password }),
       });
-console.log("Sending login request with:", { email: email, password: password });
+      console.log("Sending login request with:", {
+        email: email,
+        password: password,
+      });
       const data = await response.json();
       console.log(data);
       const token = data.token;
@@ -179,8 +178,10 @@ console.log("Sending login request with:", { email: email, password: password })
           Fitness
         </h1>
         <div className="cal-button mr-6  sm:mr-8 md:mr-10 lg:mr-12 xl:mr-14 2xl:mr-16">
-          <button className="w-10 h-10 sm:w-12 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-[#5492DA] rounded-full border-2 border-black flex items-center justify-center hover:bg-gray-600 transition-all duration-200"
-          onClick={YearCalendar}>
+          <button
+            className="w-10 h-10 sm:w-12 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-[#5492DA] rounded-full border-2 border-black flex items-center justify-center hover:bg-gray-600 transition-all duration-200"
+            onClick={YearCalendar}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

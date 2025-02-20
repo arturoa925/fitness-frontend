@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import BASE_URL from "./Config";
 
 function LastTwoWeeksCalendar({ onDateClick }) {
-  // // * Render URL
-  // const API_BASE_URL = import.meta.env.VITE_API_URL;
-
   // * Get the last 12 days including today
   const today = new Date();
   const lastTwoWeeks = Array.from({ length: 12 }, (_, i) => {
@@ -43,13 +40,11 @@ function LastTwoWeeksCalendar({ onDateClick }) {
 
   useEffect(() => {
     fetchAllWorkouts();
-  }
-  , []);
+  }, []);
 
   const hasWorkout = (date) => {
     return workoutDates.includes(date);
   };
-
 
   // * create a grid of buttons for each day
   return (
@@ -57,8 +52,6 @@ function LastTwoWeeksCalendar({ onDateClick }) {
       {lastTwoWeeks.map((date, index) => {
         const formattedDate = format(new Date(date), "yyyy-MM-dd"); // Ensure format consistency
         const isWorkoutDay = hasWorkout(formattedDate); // Check if workout exists
-
-        // TODO: change color of button if a workout exists or has been generated on that day
 
         return (
           <button
